@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "jira-github": {
+      "command": "node",
+      "args": ["%USERPROFILE%\\Documents\\Cline\\MCP\\jira-github-mcp\\dist\\index.js"],
+      "env": {
+        "GITHUB_TOKEN": "your-github-token-here",
+        "JIRA_URL": "your-jira-url-here",
+        "JIRA_USERNAME": "your-jira-email-here",
+        "JIRA_API_TOKEN": "your-jira-api-token-here"
+      },
+      "cwd": "%USERPROFILE%\\Documents\\Cline\\MCP\\jira-github-mcp",
+      "autoApprove": ["get_production_changes"]
+    }
+  }
+}

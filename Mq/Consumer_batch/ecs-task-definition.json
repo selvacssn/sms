@@ -1,0 +1,43 @@
+{
+    "family": "ssn-task-batch",
+    "containerDefinitions": [
+      {
+        "name": "ssn-container-batch",
+        "image": "977611583554.dkr.ecr.us-east-1.amazonaws.com/ssn:mqad",
+        "memory": 512,
+        "cpu": 256,
+        "essential": true,
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/ssn-task-batch",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs"
+          }
+        },
+        "secrets": [
+          {
+            "name": "MQ_HOST",
+            "valueFrom": "arn:aws:secretsmanager:us-east-1:977611583554:secret:MQ-Rls3U3:MQ_HOST::"
+          },
+          {
+            "name": "QUEUE_NAME",
+            "valueFrom": "arn:aws:secretsmanager:us-east-1:977611583554:secret:MQ-Rls3U3:QUEUE_NAME::"
+          },
+          {
+            "name": "USERNAME",
+            "valueFrom": "arn:aws:secretsmanager:us-east-1:977611583554:secret:MQ-Rls3U3:USERNAME::"
+          },
+          {
+            "name": "PASSWORD",
+            "valueFrom": "arn:aws:secretsmanager:us-east-1:977611583554:secret:MQ-Rls3U3:PASSWORD::"
+          }
+        ]
+      }
+    ],
+    "requiresCompatibilities": ["FARGATE"],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::977611583554:role/ecsTaskExecutionRole"
+  }

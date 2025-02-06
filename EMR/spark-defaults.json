@@ -1,0 +1,36 @@
+[
+  {
+    "Classification": "spark-defaults",
+    "Properties": {
+      "spark.executor.memory": "2g",
+      "spark.driver.memory": "2g",
+      "spark.executor.cores": "2",
+      "spark.driver.cores": "1",
+      "spark.python.worker.memory": "512m",
+      "spark.yarn.submit.waitAppCompletion": "true",
+      "spark.eventLog.enabled": "true",
+      "spark.eventLog.dir": "s3://ssn0212/spark-logs",
+      "spark.history.fs.logDirectory": "s3://ssn0212/spark-logs",
+      "spark.sql.files.maxPartitionBytes": "134217728",
+      "spark.sql.files.ignoreCorruptFiles": "true",
+      "spark.sql.files.ignoreMissingFiles": "true",
+      "spark.hadoop.fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
+      "spark.jars.packages": "org.apache.hadoop:hadoop-aws:3.3.3",
+      "spark.executor.extraClassPath": "/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*",
+      "spark.driver.extraClassPath": "/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*"
+    }
+  },
+  {
+    "Classification": "spark-env",
+    "Properties": {},
+    "Configurations": [
+      {
+        "Classification": "export",
+        "Properties": {
+          "PYSPARK_PYTHON": "/usr/bin/python3",
+          "PYSPARK_DRIVER_PYTHON": "/usr/bin/python3"
+        }
+      }
+    ]
+  }
+]

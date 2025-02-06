@@ -1,0 +1,53 @@
+{
+    "Name": "Customer ID Processing Cluster",
+    "ReleaseLabel": "emr-6.10.0",
+    "LogUri": "s3://ssn0212/logs/",
+    "Applications": [
+        {
+            "Name": "Spark"
+        }
+    ],
+    "Instances": {
+        "InstanceGroups": [
+            {
+                "Name": "Master nodes",
+                "Market": "ON_DEMAND",
+                "InstanceRole": "MASTER",
+                "InstanceType": "m5.xlarge",
+                "InstanceCount": 1
+            },
+            {
+                "Name": "Worker nodes",
+                "Market": "ON_DEMAND",
+                "InstanceRole": "CORE",
+                "InstanceType": "m5.xlarge",
+                "InstanceCount": 2
+            }
+        ],
+        "KeepJobFlowAliveWhenNoSteps": false,
+        "TerminationProtected": false
+    },
+    "Steps": [
+        {
+            "Name": "Customer ID Processing",
+            "ActionOnFailure": "TERMINATE_CLUSTER",
+            "HadoopJarStep": {
+                "Jar": "command-runner.jar",
+                "Args": [
+                    "spark-submit",
+                    "--deploy-mode", "cluster",
+                    "s3://ssn0212/scripts/processor.py",
+                    "s3://ssn0212/input/customer_ids_20250204_190953.json"
+                ]
+            }
+        }
+    ],
+    "JobFlowRole": "EMR_EC2_DefaultRole",
+    "ServiceRole": "EMR_DefaultRole",
+    "Tags": [
+        {
+            "Key": "Purpose",
+            "Value": "CustomerIDProcessing"
+        }
+    ]
+}

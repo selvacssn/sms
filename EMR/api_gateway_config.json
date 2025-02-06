@@ -1,0 +1,81 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Risk Profile API",
+        "version": "1.0.0"
+    },
+    "schemes": ["https"],
+    "paths": {
+        "/risk-profile": {
+            "post": {
+                "produces": ["application/json"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "risk_profile_id": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["risk_profile_id"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                },
+                                "risk_profile_id": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "headers": {
+                            "Access-Control-Allow-Origin": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "x-amazon-apigateway-integration": {
+                    "type": "mock",
+                    "requestTemplates": {
+                        "application/json": "{\"statusCode\": 200}"
+                    },
+                    "responses": {
+                        "default": {
+                            "statusCode": "200",
+                            "responseTemplates": {
+                                "application/json": "#set($context.responseOverride.sleep = 10) {\"message\": \"Successfully processed\", \"risk_profile_id\": $input.json('$.risk_profile_id')}"
+                            },
+                            "responseParameters": {
+                                "method.response.header.Access-Control-Allow-Origin": "'*'"
+                            }
+                        }
+                    },
+                    "passthroughBehavior": "when_no_match",
+                    "timeoutInMillis": 3000
+                }
+            }
+        }
+    },
+    "x-amazon-apigateway-logging": {
+        "accessLogging": {
+            "destinationArn": "arn:aws:logs:${region}:${account-id}:log-group:/aws/apigateway/risk-profile-api",
+            "format": "$context.identity.sourceIp - - [$context.requestTime] \"$context.httpMethod $context.routeKey $context.protocol\" $context.status $context.responseLength $context.requestId $context.integrationErrorMessage"
+        },
+        "executionLogging": {
+            "enabled": true,
+            "logLevel": "INFO",
+            "fullRequest": true,
+            "fullResponse": true
+        }
+    }
+}

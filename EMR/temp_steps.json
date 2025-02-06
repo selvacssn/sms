@@ -1,0 +1,17 @@
+[
+  {
+    "Type": "CUSTOM_JAR",
+    "Name": "Customer ID Processing",
+    "ActionOnFailure": "TERMINATE_CLUSTER",
+    "Jar": "command-runner.jar",
+    "Args": [
+      "spark-submit",
+      "--deploy-mode",
+      "cluster",
+      "--master",
+      "yarn",
+      "s3://ssn0212/scripts/processor.py",
+      "s3://ssn0212/input/customer_ids_20250204_190953.json"
+    ]
+  }
+]
