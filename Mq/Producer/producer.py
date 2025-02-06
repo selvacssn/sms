@@ -7,10 +7,10 @@ MQ_HOST = os.getenv("MQ_HOST", "default_host")
 QUEUE_NAME = os.getenv("QUEUE_NAME", "default_queue")
 USERNAME = os.getenv("USERNAME", "default_user")
 PASSWORD = os.getenv("PASSWORD", "default_password")
-MQ_HOST = "b-db6b5461-37f7-4053-9e88-f348dd896243.mq.us-east-1.amazonaws.com"
+MQ_HOST = "xxxxxxxx.mq.us-east-1.amazonaws.com"# Replace with your MQ host
 QUEUE_NAME = "oe"
-USERNAME = "ssn"  # Replace with your username
-PASSWORD = "AlwaysC00l!23" 
+USERNAME = ""  # Replace with your username
+PASSWORD = "" # Replace with your password
 
 def push_ids_to_queue(customer_ids):
     # Set up credentials and SSL options
